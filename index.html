@@ -5,35 +5,57 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
   <title>柯文哲 台灣值得更好的選擇</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" type="text/css" href="./style.css" />
-  <script type="text/javascript" src="./script.js" ></script>
+<style>
+body {
+    font-size: 20px;
+    font-weight: bold;
+    color: #344648;
+    background-color: #f7f1ed;
+}
+
+header {
+        background-color: #bacec1;
+        padding: 10px 5px;
+    font-size: 36px;
+    font-weight: bolder;
+    }
+    span.subtitle {
+    font-size: 16px;
+    display: block;
+}
+    ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li {
+        padding: 10px 5px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    li:hover {
+        background-color: #e7dcd4;
+        font-weight: bolder;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+</style>
 </head>
 <body>
-<div id="loading">KP 向前行 &nbsp;<span class="spinner"></span></div>
-<div class="sidebar">
+<div class="content">
   <header>
     柯文哲
     <span class="subtitle">台灣值得更好的選擇</span>
   </header>
   <ul>
-    <li id="main市長政績" class="main" title="市長政績">
-      <div id="chk市長政績" class="chk" title="市長政績">2014~2022 市長政績</div>
-      <div id="phonedetail市長政績" class="phonedetail">
-        市長政績
-      </div>
+    <li class="main">
+      <a href="/kptaipei">2014~2022 市長政績</a>
     </li>
   </ul>
-</div>
-<div class="sidebarbg">&nbsp;</div>
-<div class="content">
-  <div id="detail市長政績" class="detail">
-    <div class="detailHeader">
-      市長政績
-    </div>
-    <div class="detailcontent" title="市長政績">
-      <a href="/kptaipei">市長政績</a>
-    </div>
-  </div>
 </div>
 </body>
 </html>
