@@ -16,6 +16,15 @@ window.onload = function () {
                 document.getElementById("phonedetail" + evt.currentTarget.title).style.display =  "none";
             }
         }
+
+        document.getElementById("sitetitle").addEventListener("click", showPhoneMainDetail);
+
+        function showPhoneMainDetail(evt) {
+            const status = document.getElementById("phonemain").style.display;
+            console.log(status);
+            document.getElementById("phonemain").style.display = (status == '' || status == 'none' || status == undefined)?"block":"none";
+        }
+
     } else {
         document.querySelectorAll("div.phonedetail").forEach(el => {
             el.innerHTML = "";

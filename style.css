@@ -146,6 +146,7 @@ h2 {
 
 h1 {
     padding: 10px 5px;
+    cursor: pointer;
 }
 
 h3 {
@@ -157,6 +158,14 @@ h3 {
 a {
     text-decoration: none;
     color: #333;
+}
+
+#phonemain {
+    display:none;
+}
+
+div.mainbox div.intro div.signature {
+    text-align: right;
 }
 
 span.subtitle {
@@ -243,6 +252,20 @@ ul {
         background-color: #bacec1;
     }
 
+    div.mainbox {
+        padding: 10px;
+    }
+
+    div.mainbox div.quote {
+        font-size: 24px;
+        line-height: 36px;
+        padding: 10px 0px 20px 0px;
+    }
+
+    div.mainbox div.article {
+        line-height: 24px;
+    }
+
     span.subtitle {
         display: block;
     }
@@ -271,10 +294,6 @@ ul {
         display: flex;
     }
 
-    h1 {
-        cursor: pointer;
-    }
-
     .sidebar {
         left: 0px;
         top: 0px;
@@ -285,6 +304,14 @@ ul {
 
     span.subtitle {
         display: block;
+    }
+
+    div.mainbox {
+        padding: 10px;
+    }
+
+    div.mainbox div.quote {
+        line-height: 36px;font-size: 30px;
     }
 
     li {
