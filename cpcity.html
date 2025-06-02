@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京華城開庭紀錄</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: bold;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: #555;
+        }
+
+        .hearing-item {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .hearing-item:hover {
+            border-color: #999;
+        }
+
+        .hearing-header {
+            background: #f8f8f8;
+            color: #333;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .hearing-header:hover {
+            background: #eeeeee;
+        }
+
+        .expand-icon {
+            margin-right: 12px;
+            font-size: 16px;
+            transition: transform 0.2s ease;
+            color: #666;
+        }
+
+        .hearing-item.expanded .expand-icon {
+            transform: rotate(90deg);
+        }
+
+        .hearing-title {
+            font-size: 16px;
+            font-weight: normal;
+            color: #333;
+        }
+
+        .hearing-content {
+            max-height: 0;
+            overflow: hidden;
+            background: white;
+            transition: max-height 0.2s ease;
+        }
+
+        .hearing-item.expanded .hearing-content {
+            max-height: 9000px;
+        }
+
+        .content-inner {
+            padding: 20px;
+        }
+
+        .content-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #333;
+            font-size: 15px;
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #666;
+        }
+
+        .videos-section, .images-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: #666;
+            margin-right: 8px;
+            border-radius: 1px;
+        }
+
+        .video-container, .images-container, .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .video-item, .image-item, .link-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: border-color 0.2s ease;
+        }
+
+        .video-item:hover, .image-item:hover, .link-item:hover {
+            border-color: #999;
+        }
+
+        .video-item iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+
+        .image-item img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: contain;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            display: block;
+        }
+
+        .video-description, .image-description {
+            padding: 10px 15px;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            border-top: 1px solid #eee;
+        }
+
+        .link-item {
+            padding: 15px;
+            background: white;
+        }
+
+        .link-item a {
+            color: #1976d2;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .link-item a:hover {
+            color: #1565c0;
+            text-decoration: underline;
+        }
+
+        .links-section {
+            margin-bottom: 20px;
+        }
+
+        .data-sources {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            text-align: right;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .data-sources a {
+            color: #666;
+            text-decoration: none;
+            margin-left: 8px;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .data-sources a:hover {
+            color: #333;
+        }
+
+        .data-sources a i {
+            font-size: 16px;
+        }
+
+        .data-sources a i.fa-facebook {
+            color: #1877f2;
+        }
+
+        .data-sources a i.fa-youtube {
+            color: #ff0000;
+        }
+
+        .source-item {
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        .source-item:first-child {
+            margin-left: 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #d32f2f;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .hearing-header {
+                padding: 15px;
+            }
+            
+            .hearing-title {
+                font-size: 16px;
+            }
+            
+            .video-container, .links-container {
+                flex-direction: column;
+            }
+
+            .images-container {
+                flex-direction: column;
+            }
+
+            .image-item {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>京華城開庭紀錄</h1>
+        
+        <div class="header-controls">
+            <div></div>
+            <div class="control-buttons">
+                <button class="control-btn" onclick="expandAll()">全部展開</button>
+                <button class="control-btn" onclick="collapseAll()">全部收起</button>
+            </div>
+        </div>
+        
+        <div id="hearingsList">
+            <div class="loading">載入中...</div>
+        </div>
+        
+        <div class="data-sources" id="dataSources" style="display: none;">
+            資料來源：
+        </div>
+    </div>
+
+    <script>
+        let hearingsData = [];
+
+        // 載入 JSON 資料
+        async function loadHearingsData() {
+            try {
+                const response = await fetch('./courts.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                hearingsData = data.hearings || data; // 支援新舊格式
+                init();
+                
+                // 載入資料來源
+                if (data.dataSources && data.dataSources.length > 0) {
+                    loadDataSources(data.dataSources);
+                }
+            } catch (error) {
+                console.error('載入資料時發生錯誤:', error);
+                const hearingsList = document.getElementById('hearingsList');
+                hearingsList.innerHTML = `
+                    <div class="error">
+                        <p>載入資料時發生錯誤，請確認 courts.json 檔案是否存在於同目錄下。</p>
+                        <p>錯誤詳情: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 載入資料來源
+        function loadDataSources(sources) {
+            const dataSourcesElement = document.getElementById('dataSources');
+            const sourceItems = sources.map(source => {
+                let icon = '';
+                if (source.type === 'facebook') {
+                    icon = '<i class="fab fa-facebook"></i>';
+                } else if (source.type === 'youtube') {
+                    icon = '<i class="fab fa-youtube"></i>';
+                }
+                
+                return `<span class="source-item"><a href="${source.url}" target="_blank">${icon} ${source.name}</a></span>`;
+            }).join('');
+            
+            dataSourcesElement.innerHTML = `資料來源：${sourceItems}`;
+            dataSourcesElement.style.display = 'block';
+        }
+
+        // 將 YouTube 網址轉換為嵌入格式的函數
+        function convertToEmbedUrl(url) {
+            if (url.includes('youtube.com/watch?v=')) {
+                const videoId = url.split('v=')[1].split('&')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            } else if (url.includes('youtu.be/')) {
+                const videoId = url.split('youtu.be/')[1].split('?')[0];
+                return `https://www.youtube.com/embed/${videoId}`;
+            }
+            return url; // 如果已經是嵌入格式就直接返回
+        }
+
+        // 產生開庭項目的 HTML
+        function createHearingItem(hearing, index) {
+            let imagesHTML = '';
+            if (hearing.images && hearing.images.length > 0) {
+                const imageItems = hearing.images.map(image => {
+                    const descriptionHTML = image.description ? 
+                        `<div class="image-description">${image.description}</div>` : '';
+                    
+                    return `
+                        <div class="image-item">
+                            <img src="${image.url}" alt="${image.alt}" onclick="window.open('${image.url}', '_blank')">
+                            ${descriptionHTML}
+                        </div>
+                    `;
+                }).join('');
+
+                imagesHTML = `
+                    <div class="images-section">
+                        <div class="section-title">🖼️ 相關圖片</div>
+                        <div class="images-container">
+                            ${imageItems}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let videosHTML = '';
+            if (hearing.videos && hearing.videos.length > 0) {
+                const videoItems = hearing.videos.map(video => {
+                    const videoUrl = typeof video === 'string' ? video : video.url;
+                    const embedUrl = convertToEmbedUrl(videoUrl);
+                    const descriptionHTML = (typeof video === 'object' && video.description) ? 
+                        `<div class="video-description">${video.description}</div>` : '';
+                    
+                    return `
+                        <div class="video-item">
+                            <iframe src="${embedUrl}" allowfullscreen></iframe>
+                            ${descriptionHTML}
+                        </div>
+                    `;
+                }).join('');
+
+                videosHTML = `
+                    <div class="videos-section">
+                        <div class="section-title">📹 相關影片</div>
+                        <div class="video-container">
+                            ${videoItems}
+                        </div>
+                    </div>
+                `;
+            }
+
+            let linksHTML = '';
+            if (hearing.links && hearing.links.length > 0) {
+                const linkItems = hearing.links.map(link => `
+                    <div class="link-item">
+                        <a href="${link.url}" target="_blank">${link.text}</a>
+                    </div>
+                `).join('');
+
+                linksHTML = `
+                    <div class="links-section">
+                        <div class="section-title">🔗 相關連結</div>
+                        <div class="links-container">
+                            ${linkItems}
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="hearing-item">
+                    <div class="hearing-header" onclick="toggleContent(this)">
+                        <span class="expand-icon">▶</span>
+                        <span class="hearing-title">${hearing.title}</span>
+                    </div>
+                    <div class="hearing-content">
+                        <div class="content-inner">
+                            <div class="content-text">
+                                ${hearing.content}
+                            </div>
+                            ${imagesHTML}
+                            ${videosHTML}
+                            ${linksHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 初始化頁面
+        function init() {
+            const hearingsList = document.getElementById('hearingsList');
+            const hearingsHTML = hearingsData.map((hearing, index) => 
+                createHearingItem(hearing, index)
+            ).join('');
+            
+            hearingsList.innerHTML = hearingsHTML;
+            
+            // 預設展開第一個項目
+            const firstItem = document.querySelector('.hearing-item');
+            if (firstItem) {
+                firstItem.classList.add('expanded');
+            }
+        }
+
+        // 切換內容展開/收起
+        function toggleContent(header) {
+            const item = header.parentElement;
+            item.classList.toggle('expanded');
+        }
+
+        // 展開所有項目
+        function expandAll() {
+            const items = document.querySelectorAll('.hearing-item');
+            items.forEach(item => {
+                item.classList.add('expanded');
+            });
+        }
+
+        // 收起所有項目
+        function collapseAll() {
+            const items = document.querySelectorAll('.hearing-item');
+            items.forEach(item => {
+                item.classList.remove('expanded');
+            });
+        }
+
+        // 頁面載入完成後載入資料
+        document.addEventListener('DOMContentLoaded', loadHearingsData);
+    </script>
+</body>
+</html>
