@@ -190,6 +190,25 @@
             display: block;
         }
 
+        /* 圖片載入中的樣式 */
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .video-description, .image-description {
             padding: 10px 15px;
             background: #f9f9f9;
@@ -388,6 +407,38 @@
             return url; // 如果已經是嵌入格式就直接返回
         }
 
+        // 延遲載入圖片
+        function loadImages(container) {
+            const placeholders = container.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                const img = document.createElement('img');
+                const imageUrl = placeholder.dataset.src;
+                const imageAlt = placeholder.dataset.alt;
+                
+                img.src = imageUrl;
+                img.alt = imageAlt;
+                img.onclick = () => window.open(imageUrl, '_blank');
+                img.style.width = '100%';
+                img.style.maxHeight = '600px';
+                img.style.objectFit = 'contain';
+                img.style.cursor = 'pointer';
+                img.style.backgroundColor = '#f9f9f9';
+                img.style.display = 'block';
+                
+                // 圖片載入完成後替換佔位符
+                img.onload = () => {
+                    placeholder.parentNode.replaceChild(img, placeholder);
+                };
+                
+                // 圖片載入失敗的處理
+                img.onerror = () => {
+                    placeholder.innerHTML = '圖片載入失敗';
+                    placeholder.style.backgroundColor = '#ffebee';
+                    placeholder.style.color = '#c62828';
+                };
+            });
+        }
+
         // 產生開庭項目的 HTML
         function createHearingItem(hearing, index) {
             let imagesHTML = '';
@@ -398,7 +449,9 @@
                     
                     return `
                         <div class="image-item">
-                            <img src="${image.url}" alt="${image.alt}" onclick="window.open('${image.url}', '_blank')">
+                            <div class="image-placeholder" data-src="${image.url}" data-alt="${image.alt}">
+                                載入圖片中...
+                            </div>
                             ${descriptionHTML}
                         </div>
                     `;
@@ -459,7 +512,7 @@
             }
 
             return `
-                <div class="hearing-item">
+                <div class="hearing-item" data-index="${index}">
                     <div class="hearing-header" onclick="toggleContent(this)">
                         <span class="expand-icon">▶</span>
                         <span class="hearing-title">${hearing.title}</span>
@@ -487,24 +540,38 @@
             
             hearingsList.innerHTML = hearingsHTML;
             
-            // 預設展開第一個項目
+            // 預設展開第一個項目並載入其圖片
             const firstItem = document.querySelector('.hearing-item');
             if (firstItem) {
                 firstItem.classList.add('expanded');
+                loadImages(firstItem);
             }
         }
 
         // 切換內容展開/收起
         function toggleContent(header) {
             const item = header.parentElement;
+            const wasExpanded = item.classList.contains('expanded');
+            
             item.classList.toggle('expanded');
+            
+            // 如果是展開狀態且圖片還沒載入，則載入圖片
+            if (!wasExpanded && item.classList.contains('expanded')) {
+                loadImages(item);
+            }
         }
 
         // 展開所有項目
         function expandAll() {
             const items = document.querySelectorAll('.hearing-item');
             items.forEach(item => {
+                const wasExpanded = item.classList.contains('expanded');
                 item.classList.add('expanded');
+                
+                // 如果之前沒展開過，載入圖片
+                if (!wasExpanded) {
+                    loadImages(item);
+                }
             });
         }
 
