@@ -181,6 +181,60 @@
             border: none;
         }
 
+        /* 影片載入中的樣式 */
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .video-placeholder .video-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .video-placeholder .video-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
         .image-item img {
             width: 100%;
             max-height: 600px;
@@ -439,6 +493,32 @@
             });
         }
 
+        // 延遲載入影片
+        function loadVideos(container) {
+            const placeholders = container.querySelectorAll('.video-placeholder');
+            placeholders.forEach(placeholder => {
+                const videoUrl = placeholder.dataset.src;
+                const embedUrl = convertToEmbedUrl(videoUrl);
+                
+                const iframe = document.createElement('iframe');
+                iframe.src = embedUrl;
+                iframe.style.width = '100%';
+                iframe.style.height = '300px';
+                iframe.style.border = 'none';
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.setAttribute('loading', 'lazy');
+                
+                // 替換佔位符
+                placeholder.parentNode.replaceChild(iframe, placeholder);
+            });
+        }
+
+        // 載入媒體內容（圖片和影片）
+        function loadMediaContent(container) {
+            loadImages(container);
+            loadVideos(container);
+        }
+
         // 產生開庭項目的 HTML
         function createHearingItem(hearing, index) {
             let imagesHTML = '';
@@ -471,13 +551,20 @@
             if (hearing.videos && hearing.videos.length > 0) {
                 const videoItems = hearing.videos.map(video => {
                     const videoUrl = typeof video === 'string' ? video : video.url;
-                    const embedUrl = convertToEmbedUrl(videoUrl);
-                    const descriptionHTML = (typeof video === 'object' && video.description) ? 
-                        `<div class="video-description">${video.description}</div>` : '';
+                    const description = (typeof video === 'object' && video.description) ? video.description : '';
+                    const descriptionHTML = description ? 
+                        `<div class="video-description">${description}</div>` : '';
+                    
+                    // 提取影片標題（從描述中）
+                    const videoTitle = description || '相關影片';
                     
                     return `
                         <div class="video-item">
-                            <iframe src="${embedUrl}" allowfullscreen></iframe>
+                            <div class="video-placeholder" data-src="${videoUrl}" onclick="loadSingleVideo(this)">
+                                <div class="play-icon">▶</div>
+                                <div class="video-title">${videoTitle}</div>
+                                <div class="video-subtitle">點擊載入影片</div>
+                            </div>
                             ${descriptionHTML}
                         </div>
                     `;
@@ -540,11 +627,11 @@
             
             hearingsList.innerHTML = hearingsHTML;
             
-            // 預設展開第一個項目並載入其圖片
+            // 預設展開第一個項目並載入其媒體內容
             const firstItem = document.querySelector('.hearing-item');
             if (firstItem) {
                 firstItem.classList.add('expanded');
-                loadImages(firstItem);
+                loadMediaContent(firstItem);
             }
         }
 
@@ -555,10 +642,27 @@
             
             item.classList.toggle('expanded');
             
-            // 如果是展開狀態且圖片還沒載入，則載入圖片
+            // 如果是展開狀態且媒體內容還沒載入，則載入媒體內容
             if (!wasExpanded && item.classList.contains('expanded')) {
-                loadImages(item);
+                loadMediaContent(item);
             }
+        }
+
+        // 載入單個影片（點擊時觸發）
+        function loadSingleVideo(placeholder) {
+            const videoUrl = placeholder.dataset.src;
+            const embedUrl = convertToEmbedUrl(videoUrl);
+            
+            const iframe = document.createElement('iframe');
+            iframe.src = embedUrl;
+            iframe.style.width = '100%';
+            iframe.style.height = '300px';
+            iframe.style.border = 'none';
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('loading', 'lazy');
+            
+            // 替換佔位符
+            placeholder.parentNode.replaceChild(iframe, placeholder);
         }
 
         // 展開所有項目
@@ -568,9 +672,9 @@
                 const wasExpanded = item.classList.contains('expanded');
                 item.classList.add('expanded');
                 
-                // 如果之前沒展開過，載入圖片
+                // 如果之前沒展開過，載入媒體內容
                 if (!wasExpanded) {
-                    loadImages(item);
+                    loadMediaContent(item);
                 }
             });
         }
