@@ -1,6 +1,60 @@
 {
     "hearings": [
         {
+            "title": "2025 年 7 月 10 日 柯文哲發言",
+            "content": "今天早上我出庭前，在讀一本有關獨裁者的書，它說：「獨裁者不只要人民相信什麼，更要人民不相信什麼」。<br><br>我當市長時，一直秉持「#開放政府、#全民參與、#公開透明」的精神，都委會開會是錄音錄影，甚至上網直播。連專家學者諮詢會議都有完整錄音，從今天的勘驗可知，明明這些人都很認真討論市政，希望台北的都市發展更好，但在檢方的眼中，卻好像這些公務員都在搞違法圖利的勾當。",
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/hPczDFMf/20250710-5.jpg",
+                    "alt": "2025.7.10-5"
+                },
+                {
+                    "url": "https://i.postimg.cc/L5scD82J/20250710-6.png",
+                    "alt": "2025.7.10-6"
+                }
+            ],
+            "links": [
+                {
+                    "text": "今日聽庭筆記",
+                    "url": "https://www.facebook.com/DoctorKoWJ/posts/pfbid02hkFH6QKDy9ZJkBQA9sWQFLLRH8Tcax2mYNt2vmCDwkHbRbeCVr6v4zKFQcnMVEuhl"
+                }
+            ]
+        },
+        {
+            "title": "2025 年 7 月 10 日 勘驗都委會會議",
+            "content": "今日檢方申請勘驗110年兩場 #專家會議 以及第775次都委會影像，這些會議的共同點就是邀集了專家、府方、申請單位多方共同討論，確認京華城申請都市計畫變更的適法性與公益性。",
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/MTBMTqhj/20250710-1.jpg",
+                    "alt": "2025.7.10-1"
+                },
+                {
+                    "url": "https://i.postimg.cc/WzPDqxvY/20250710-2.jpg",
+                    "alt": "2025.7.10-2"
+                },
+                {
+                    "url": "https://i.postimg.cc/gjqxV4cz/20250710-3.jpg",
+                    "alt": "2025.7.10-3"
+                },
+                {
+                    "url": "https://i.postimg.cc/SQWYbQ6B/20250710-4.jpg",
+                    "alt": "2025.7.10-4"
+                }
+            ],
+            "videos": [
+                {
+                    "url": "https://www.youtube.com/watch?v=R77-OjClrvY",
+                    "description": "翟本喬 1:00:00，張啟楷 1:43:00，麥玉珍 5:53:00"
+                }
+            ],
+            "links": [
+                {
+                    "text": "今日聽庭筆記",
+                    "url": "https://www.facebook.com/DoctorKoWJ/posts/pfbid0Jpccv9KJW1muv22rFnSMAKYwNMc5XUXhM8Lp4vdXnK5dcxMzKXEEzu7qnnHNYUgHl"
+                }
+            ]
+        },
+        {
             "title": "2025 年 7 月 8 日 庭訊紀錄 胡方瓊(時任都委會技正) 郭泰祺(前都委會幕僚)",
             "content": "今日開庭，看到昔日市府公務員，小心翼翼、字斟句酌的用自己畢生專業，力抗不專業檢察官，柯P好幾次忍不住搖頭笑了，那笑容帶著欣慰與肯定，當他聽到部屬大聲說出「絕對合法」！柯文哲更忍不住眼眶紅了。",
             "images": [
