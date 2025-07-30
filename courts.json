@@ -1,6 +1,40 @@
 {
     "hearings": [
         {
+            "title": "2025 年 7 月 24 日 庭訊紀錄 彭振聲",
+            "content": "因為一個都市計畫案、賠上一條無辜的寶貴生命，過去一整年來，媒體的各種捕風捉影、未審先判所造成的傷害已無法回復，只願公正公平的審判早日到來，讓真相還原，祈願逝者安息。",
+            "images": [
+                {
+                    "url": "https://i.postimg.cc/6QsgLh2t/20250724-0.jpg",
+                    "alt": "2025.7.24-0"
+                },
+                {
+                    "url": "https://i.postimg.cc/xdK7sbMH/20250724-1.jpg",
+                    "alt": "2025.7.24-1"
+                },
+                {
+                    "url": "https://i.postimg.cc/7PBRQ4GB/20250724-2.jpg",
+                    "alt": "2025.7.24-2"
+                }
+            ],
+            "videos": [
+                {
+                    "url": "https://www.youtube.com/watch?v=LxNrn3rOzro",
+                    "description": "陳智菡 41:50，張啟楷 1:44:50，翟本喬 2:03:20，張啟楷 2:05:00"
+                }
+            ],
+            "links": [
+                {
+                    "text": "今日聽庭筆記",
+                    "url": "https://www.facebook.com/DoctorKoWJ/posts/pfbid0HidJjKUV78kxDtz5GyLFHgHJevaU2jXkKmkTtuLB1kNafhmAAiT7Avawzt6B1Bwal"
+                },
+                {
+                    "text": "今日聽庭筆記2",
+                    "url": "https://www.facebook.com/DoctorKoWJ/posts/pfbid02mK6kGCDUvvjprL2cFdYnhPFwxiBtR1Ckof9V42xmU59RLLnSQ7B1nBHYZPR8wjYUl"
+                }
+            ]
+        },
+        {
             "title": "2025 年 7 月 22 日 庭訊紀錄 楊智盛(時任都發局都市規劃科長)",
             "content": "今日作證的是林洲民口中，比優秀更優秀的公務員楊智盛，他釐清了本案起源，就來自於 #監察院113年糾正文 的錯誤認知，被檢方拿來當令劍，政治追殺柯文哲。",
             "images": [
